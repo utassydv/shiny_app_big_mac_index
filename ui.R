@@ -20,8 +20,10 @@ ui <- navbarPage(title = 'The Big Mac Index', theme = shinytheme('flatly'),
                                                        selected = c('South America', 'Oceania', 'North', 'America', 'Europe', 'Asia', 'Africa')
                                     ),
                                     dateRangeInput("range_dates", label = h3("Date range"), format = 'yyyy', end = '2020-07-01', start = '2000-01-01')
+                                  
                                   ),
                                   mainPanel(
+                                    textOutput('best_text'),
                                     girafeOutput("joint_graphs", width = "100%", height = "700px")
                                   )
                           ),

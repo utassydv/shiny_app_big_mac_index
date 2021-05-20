@@ -7,9 +7,11 @@ library(data.table)
 
 source('helpers.R')
 
-# Define server logic required to draw a histogram
 shinyServer(function(input, output) {
     
+    to_text <- reactive({
+        get_best_country(input$ticker, input$my_date[1], input$my_date[2])
+    })
     output$joint_graphs <- renderggiraph({
         GetJointPlot(as.Date(input$select_date,"%Y-%m-%d"), as.Date(input$range_dates[1],"%Y-%m-%d"), 
                      as.Date(input$range_dates[2],"%Y-%m-%d"), input$check_continent)
@@ -25,6 +27,10 @@ shinyServer(function(input, output) {
     
     output$p3_graph <- renderPlot({
         p
+    })
+    
+    output$best_test <- renderText({
+        to_text()
     })
     
     

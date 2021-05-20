@@ -6,12 +6,12 @@ library(data.table)
 
 
 # GET DATA ----------------------------------------------------------------
+# 
+# big_mac_data <- readRDS('/app/data/big_mac_data.rds')
+# data_balanced <- readRDS('/app/data/data_balanced.rds')
 
-big_mac_data <- readRDS('/app/data/big_mac_data.rds')
-data_balanced <- readRDS('/app/data/data_balanced.rds')
-
-# big_mac_data <- readRDS('data/big_mac_data.rds')
-# data_balanced <- readRDS('data/data_balanced.rds')
+big_mac_data <- readRDS('data/big_mac_data.rds')
+data_balanced <- readRDS('data/data_balanced.rds')
 
 print(big_mac_data)
 
@@ -112,5 +112,11 @@ get_data_by_ticker_and_date  <- function(ticker, start_date, end_date) {
 
   data <- big_mac_data[date >= start_date & date <= end_date & name %in% ticker]
   return(data)
+}
+
+get_best_country <- function(date_input, date_start, date_end, continents){
+  data <- big_mac_data[date >= start_date & date <= end_date & name %in% ticker]
+  country_name <- data[, .SD[which.max(usd_raw)],]$name
+  return(paste0('The best country is: ', country_name))
 }
 
